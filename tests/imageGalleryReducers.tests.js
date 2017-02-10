@@ -88,7 +88,7 @@ test('reducers - ids :: Handle removeAllImages action',
 );
 
 test('reducers - openImageId :: Handle nextImage action',
-  ({ deepEqual, end }) => {
+  ({ equal, end }) => {
     const initialState = getMockState.withManyImages();
     const actualState = reducers.openImageId(
       initialState.openImageId,
@@ -96,13 +96,27 @@ test('reducers - openImageId :: Handle nextImage action',
     );
     const expectedState = '5';
 
-    deepEqual(actualState, expectedState);
+    equal(actualState, expectedState);
+    end();
+  }
+);
+
+test('reducers - openImageId :: Handle nextImage action edge case if no more images are next up',
+  ({ equal, end }) => {
+    const initialState = getMockState.withOneImage();
+    const actualState = reducers.openImageId(
+      initialState.openImageId,
+      actions.nextImage(initialState)
+    );
+    const expectedState = initialState.openImageId;
+
+    equal(actualState, expectedState);
     end();
   }
 );
 
 test('reducers - openImageId :: Handle previousImage action',
-  ({ deepEqual, end }) => {
+  ({ equal, end }) => {
     const initialState = getMockState.withManyImages();
     const actualState = reducers.openImageId(
       initialState.openImageId,
@@ -110,28 +124,42 @@ test('reducers - openImageId :: Handle previousImage action',
     );
     const expectedState = '3';
 
-    deepEqual(actualState, expectedState);
+    equal(actualState, expectedState);
+    end();
+  }
+);
+
+test('reducers - openImageId :: Handle previousImage action edge case if no more images are previous',
+  ({ equal, end }) => {
+    const initialState = getMockState.withOneImage();
+    const actualState = reducers.openImageId(
+      initialState.openImageId,
+      actions.previousImage(initialState)
+    );
+    const expectedState = initialState.openImageId;
+
+    equal(actualState, expectedState);
     end();
   }
 );
 
 test('reducers - openImageId :: Handle openImageLightboxCarousel action',
-  ({ deepEqual, end }) => {
+  ({ equal, end }) => {
     const initialState = getMockState.withManyImages();
-    const id = '7'
+    const id = '7' // id of selected/clicked image
     const actualState = reducers.openImageId(
       initialState.openImageId,
       actions.openImageLightboxCarousel(id)
     );
     const expectedState = '7';
 
-    deepEqual(actualState, expectedState);
+    equal(actualState, expectedState);
     end();
   }
 );
 
 test('reducers - openImageId :: Handle closeImageLightboxCarousel action',
-  ({ deepEqual, end }) => {
+  ({ equal, end }) => {
     const initialState = getMockState.withManyImages();
     const actualState = reducers.openImageId(
       initialState.openImageId,
@@ -139,7 +167,7 @@ test('reducers - openImageId :: Handle closeImageLightboxCarousel action',
     );
     const expectedState = null;
 
-    deepEqual(actualState, expectedState);
+    equal(actualState, expectedState);
     end();
   }
 );

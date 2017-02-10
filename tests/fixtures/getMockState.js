@@ -24,7 +24,7 @@ export const getMockState = {
       }
     },
     ids: ['1'],
-    openImageId: null
+    openImageId: '1'
   }),
 
   withManyImages: () => ({
