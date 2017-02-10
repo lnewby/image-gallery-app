@@ -27,3 +27,25 @@ export const ids = (state = {}, { type, payload }) => {
       return state;
   }
 }
+
+export const openImageId = (state = {}, { type, payload: { ids } }) => {
+  const currentOpenImageIndex = ids.indexOf(state)
+
+  switch (type) {
+    case 'NEXT_IMAGE':
+      return (currentOpenImageIndex < ids.length)
+        ? ids[currentOpenImageIndex + 1]
+        : -1; // negative -1 indicates on more images exist
+
+    case 'PREVIOUS_IMAGE':
+      return (currentOpenImageIndex > 0)
+        ? ids[currentOpenImageIndex - 1]
+        : -1; // negative -1 indicates on more images exist
+
+    case 'OPEN_IMAGE_LIGHTBOX_CAROUSEL':
+    case 'CLOSE_IMAGE_LIGHTBOX_CAROUSEL':
+
+    default:
+      return state;
+  }
+}

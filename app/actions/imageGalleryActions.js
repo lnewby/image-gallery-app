@@ -20,12 +20,18 @@ export const removeAllImages = () => ({
   type: 'REMOVE_ALL_IMAGES'
 });
 
-export const nextImage = () => ({
-  type: 'NEXT_IMAGE'
+export const nextImage = ({ids}) => ({
+  type: 'NEXT_IMAGE',
+  payload: {
+    ids
+  }
 });
 
-export const previousImage = () => ({
-  type: 'PREVIOUS_IMAGE'
+export const previousImage = ({ids}) => ({
+  type: 'PREVIOUS_IMAGE',
+  payload: {
+    ids
+  }
 });
 
 export const openImageLightboxCarousel = (id) => ({
