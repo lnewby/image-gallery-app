@@ -1,0 +1,32 @@
+{
+  "name": "image-gallery-app",
+  "version": "1.0.0",
+  "description": "Image Gallery App created with pure ES6",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lnewby/image-gallery-app.git"
+  },
+  "author": "Lance Newby",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lnewby/image-gallery-app/issues"
+  },
+  "homepage": "https://github.com/lnewby/image-gallery-app#readme",
+  "dependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.3.0"
+  }
+}
