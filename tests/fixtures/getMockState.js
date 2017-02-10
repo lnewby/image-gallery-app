@@ -11,7 +11,7 @@ each time makes sure our tests are truly isolated from one another.
 export const getMockState = {
   withoutImages: () => ({
     byId: {},
-    id: [],
+    ids: [],
     openImageId: null
   }),
 
@@ -23,7 +23,7 @@ export const getMockState = {
         title: 'Test Title'
       }
     },
-    id: ['1'],
+    ids: ['1'],
     openImageId: null
   }),
 }

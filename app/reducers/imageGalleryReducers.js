@@ -11,3 +11,16 @@ export const byId = (state = {}, { type, payload }) => {
       return state;
   }
 }
+
+export const ids = (state = {}, { type, payload }) => {
+  switch (type) {
+    case 'ADD_IMAGE':
+      return [...state, payload.id];
+
+    case 'REMOVE_IMAGE':
+      return state.filter( element => element != payload.id );
+
+    default:
+      return state;
+  }
+}

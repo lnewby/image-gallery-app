@@ -34,3 +34,29 @@ test('reducers - byId :: Handle removeImage action',
     end();
   }
 );
+
+test('reducers - ids :: Handle addImage action',
+  ({ deepEqual, end }) => {
+    const state = getMockState.withoutImages();
+    const id = '1'
+    const src = 'http://placehold.it/100x100';
+    const title = 'Test Title'
+    const actualState = reducers.ids(state.ids, actions.addImage(id, src, title));
+    const expectedState = [id];
+
+    deepEqual(actualState, expectedState);
+    end();
+  }
+);
+
+test('reducers - ids :: Handle removeImage action',
+  ({ deepEqual, end }) => {
+    const state = getMockState.withOneImage();
+    const id = '1'
+    const actualState = reducers.ids(state.ids, actions.removeImage(id));
+    const expectedState = [];
+
+    deepEqual(actualState, expectedState);
+    end();
+  }
+);
