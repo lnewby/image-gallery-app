@@ -27,6 +27,7 @@
     "webpack": "^2.2.1"
   },
   "devDependencies": {
+    "tape": "^4.6.3",
     "webpack-dev-server": "^2.3.0"
   }
 }
