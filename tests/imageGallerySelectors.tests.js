@@ -17,10 +17,10 @@ test('selectors - getImage :: return an image object from state',
   }
 );
 
-test('selectors - getImages :: return an array of all image objects from state',
+test('selectors - getAllImages :: return an array of all image objects from state',
   ({ deepEqual, end }) => {
     const initialState = getMockState.withManyImages();
-    const actualState = selectors.getImages(initialState);
+    const actualState = selectors.getAllImages(initialState);
     const expectedState = [...initialState.byId];
 
     deepEqual(actualState, expectedState);
