@@ -26,4 +26,46 @@ export const getMockState = {
     ids: ['1'],
     openImageId: null
   }),
+
+  withManyImages: () => ({
+    byId: {
+      '1': {
+        id: '1',
+        src: 'http://placehold.it/100x100',
+        title: 'Test Title 1'
+      },
+      '2': {
+        id: '2',
+        src: 'http://placehold.it/100x100',
+        title: 'Test Title 2'
+      },
+      '3': {
+        id: '3',
+        src: 'http://placehold.it/100x100',
+        title: 'Test Title 3'
+      },
+      '4': {
+        id: '4',
+        src: 'http://placehold.it/100x100',
+        title: 'Test Title 4'
+      },
+      '5': {
+        id: '5',
+        src: 'http://placehold.it/100x100',
+        title: 'Test Title 5'
+      },
+      '6': {
+        id: '6',
+        src: 'http://placehold.it/100x100',
+        title: 'Test Title 6'
+      },
+      '7': {
+        id: '7',
+        src: 'http://placehold.it/100x100',
+        title: 'Test Title 7'
+      }
+    },
+    ids: ['1', '2', '3', '4', '5', '6', '7'],
+    openImageId: null
+  })
 }

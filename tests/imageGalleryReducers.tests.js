@@ -60,3 +60,14 @@ test('reducers - ids :: Handle removeImage action',
     end();
   }
 );
+
+test('reducers - ids :: Handle removeAllImages action',
+  ({ deepEqual, end }) => {
+    const state = getMockState.withManyImages();
+    const actualState = reducers.ids(state.ids, actions.removeAllImages());
+    const expectedState = [];
+
+    deepEqual(actualState, expectedState);
+    end();
+  }
+);

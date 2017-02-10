@@ -20,6 +20,9 @@ export const ids = (state = {}, { type, payload }) => {
     case 'REMOVE_IMAGE':
       return state.filter( element => element != payload.id );
 
+    case 'REMOVE_ALL_IMAGES':
+      return [];
+
     default:
       return state;
   }
