@@ -72,3 +72,31 @@ test('action creator - previousImage :: Create correct action',
     end();
   }
 );
+
+test('action creator - openImageLightboxCarousel :: Create correct action',
+  ({ deepEqual, end }) => {
+    const id = '1';
+    const actualAction = actions.openImageLightboxCarousel(id);
+    const expectedAction = {
+      type: 'OPEN_IMAGE_LIGHTBOX_CAROUSEL',
+      payload: {
+        id
+      }
+    }
+
+    deepEqual(actualAction, expectedAction);
+    end();
+  }
+);
+
+test('action creator - closeImageLightboxCarousel :: Create correct action',
+  ({ deepEqual, end }) => {
+    const actualAction = actions.closeImageLightboxCarousel();
+    const expectedAction = {
+      type: 'CLOSE_IMAGE_LIGHTBOX_CAROUSEL'
+    }
+
+    deepEqual(actualAction, expectedAction);
+    end();
+  }
+)

@@ -27,3 +27,14 @@ export const nextImage = () => ({
 export const previousImage = () => ({
   type: 'PREVIOUS_IMAGE'
 });
+
+export const openImageLightboxCarousel = (id) => ({
+  type: 'OPEN_IMAGE_LIGHTBOX_CAROUSEL',
+  payload: {
+    id
+  }
+});
+
+export const closeImageLightboxCarousel = () => ({
+  type: 'CLOSE_IMAGE_LIGHTBOX_CAROUSEL'
+});
