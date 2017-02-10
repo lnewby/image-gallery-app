@@ -36,3 +36,15 @@ test('action creator - removeImage :: Create correct action',
     end();
   }
 );
+
+test('action creator - removeAllImages :: Create correct action',
+  ({ deepEqual, end }) => {
+    const actualAction = actions.removeAllImages();
+    const expectedAction = {
+      type: 'REMOVE_ALL_IMAGES'
+    }
+
+    deepEqual(actualAction, expectedAction);
+    end();
+  }
+);

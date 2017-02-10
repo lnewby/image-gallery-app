@@ -15,3 +15,7 @@ export const removeImage = (id) => ({
     id
   }
 });
+
+export const removeAllImages = () => ({
+  type: 'REMOVE_ALL_IMAGES'
+});
