@@ -1,10 +1,10 @@
 import { v4 } from 'uuid';
 
-export const addImage = (id = v4(), url, title) => ({
+export const addImage = (id = v4(), src, title) => ({
   type: 'ADD_IMAGE',
   payload: {
     id,
-    url,
+    src,
     title
   }
 });

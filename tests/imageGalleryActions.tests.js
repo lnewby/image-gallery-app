@@ -4,14 +4,14 @@ import * as actions from '../app/actions/imageGalleryActions.js';
 test('action creator - addImage :: Create correct action',
   ({ deepEqual, end }) => {
     const id = '1'
-    const url = 'http://slack.com';
+    const src = 'http://placehold.it/100x100';
     const title = 'Test Title'
-    const actualAction = actions.addImage(id, url, title);
+    const actualAction = actions.addImage(id, src, title);
     const expectedAction = {
       type: 'ADD_IMAGE',
       payload: {
         id,
-        url,
+        src,
         title
       }
     }
