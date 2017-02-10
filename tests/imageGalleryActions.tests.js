@@ -20,3 +20,19 @@ test('action creator - addImage :: Create correct action',
     end();
   }
 );
+
+test('action creator - removeImage :: Create correct action',
+  ({ deepEqual, end }) => {
+    const id = '1'
+    const actualAction = actions.removeImage(id);
+    const expectedAction = {
+      type: 'REMOVE_IMAGE',
+      payload: {
+        id
+      }
+    }
+
+    deepEqual(actualAction, expectedAction);
+    end();
+  }
+);

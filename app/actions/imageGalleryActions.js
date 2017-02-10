@@ -8,3 +8,10 @@ export const addImage = (id = v4(), url, title) => ({
     title
   }
 });
+
+export const removeImage = (id) => ({
+  type: 'REMOVE_IMAGE',
+  payload: {
+    id
+  }
+});
