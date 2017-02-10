@@ -48,3 +48,27 @@ test('action creator - removeAllImages :: Create correct action',
     end();
   }
 );
+
+test('action creator - nextImage :: Create correct action',
+  ({ deepEqual, end }) => {
+    const actualAction = actions.nextImage();
+    const expectedAction = {
+      type: 'NEXT_IMAGE'
+    }
+
+    deepEqual(actualAction, expectedAction);
+    end();
+  }
+);
+
+test('action creator - previousImage :: Create correct action',
+  ({ deepEqual, end }) => {
+    const actualAction = actions.previousImage();
+    const expectedAction = {
+      type: 'PREVIOUS_IMAGE'
+    }
+
+    deepEqual(actualAction, expectedAction);
+    end();
+  }
+);

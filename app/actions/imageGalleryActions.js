@@ -19,3 +19,11 @@ export const removeImage = (id) => ({
 export const removeAllImages = () => ({
   type: 'REMOVE_ALL_IMAGES'
 });
+
+export const nextImage = () => ({
+  type: 'NEXT_IMAGE'
+});
+
+export const previousImage = () => ({
+  type: 'PREVIOUS_IMAGE'
+});
