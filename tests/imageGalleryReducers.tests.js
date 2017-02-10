@@ -22,3 +22,15 @@ test('reducers - byId :: Handle addImage action',
     end();
   }
 );
+
+test('reducers - byId :: Handle removeImage action',
+  ({ deepEqual, end }) => {
+    const state = getMockState.withOneImage();
+    const id = '1'
+    const actualState = reducers.byId(state.byId, actions.removeImage(id));
+    const expectedState = {};
+
+    deepEqual(actualState, expectedState);
+    end();
+  }
+);
