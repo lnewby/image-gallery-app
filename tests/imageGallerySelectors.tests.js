@@ -30,10 +30,14 @@ test('selectors - getImage :: return an empty object if no images exist',
 
 test('selectors - getAllImages :: return an array of all image objects from state',
   ({ deepEqual, end }) => {
-    const state = getMockState.withManyImages();
+    const state = getMockState.withOneImage();
     const actualImages = selectors.getAllImages(state);
-    const expectedImages = [...state.byId];
-
+    const expectedImages = [{
+      id: '1',
+      src: 'http://placehold.it/100x100',
+      title: 'Test Title'
+    }];
+    console.log(expectedImages);
     deepEqual(actualImages, expectedImages);
     end();
   }
