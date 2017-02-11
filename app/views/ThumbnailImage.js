@@ -12,8 +12,9 @@ class ThumbnailImage {
 
   render() {
     const { src, title: alt } = this.image;
+    const thumbnailImage = new ImageCrop({ src, alt });
 
-    return ImageCrop({ src, alt });
+    return thumbnailImage.render();
   }
 }
 
