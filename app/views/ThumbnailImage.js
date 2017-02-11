@@ -1,13 +1,13 @@
 import ImageCrop from './ImageCrop.js';
 import dom from '../../public/utils/DOMUtils.js';
 
-const ThumbnailImage = ({images, openImageId, width, height}) => {
-  console.log(openImageId);
+const ThumbnailImage = ({images, image, width, height}) => {
+  console.log(image);
   const {
     src,
-    title
-  } = images[openImageId];
-  return ImageCrop({src, title});
+    title: alt
+  } = image;
+  return ImageCrop({src, alt});
 };
 
 export default ThumbnailImage;

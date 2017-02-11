@@ -1,7 +1,14 @@
 import dom from '../../public/utils/DOMUtils.js';
 import ThumbnailImage from './ThumbnailImage.js';
 
-const ImageThumbnailsCarousel = ({images = [], openImageId, openImageLightboxCarousel}) => {
+const ImageThumbnailsCarousel = ({images = [], thumbsPerPage, imageMarker, openImageLightboxCarousel}) => {
+  const imageGroup = () => {
+    const start = imageMarker;
+    const end = start + thumbsPerPage;
+
+    return this.props.images.slice(start, end);
+  }
+
   const rootImageGalleryNode = dom.getElementById('image-gallery-app');
 
   const div = dom.createElement('div');
@@ -15,8 +22,7 @@ const ImageThumbnailsCarousel = ({images = [], openImageId, openImageLightboxCar
     </div>
     */
     images.map((image, index, images) => {
-      dom.write(`${index}: ${image.title}, `);
-      rootImageGalleryNode.appendChild(ThumbnailImage({images, openImageId}));
+      rootImageGalleryNode.appendChild(ThumbnailImage({images, image}));
     });
   } else {
     dom.write('No images');
