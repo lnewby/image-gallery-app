@@ -22,7 +22,8 @@ const ImageThumbnailsCarousel = ({images = [], thumbsPerPage, imageMarker, openI
     </div>
     */
     images.map((image, index, images) => {
-      rootImageGalleryNode.appendChild(ThumbnailImage({images, image}));
+      const thumbnail = new ThumbnailImage({ images, image, width: 100, height: 100 });
+      rootImageGalleryNode.appendChild(thumbnail.render());
     });
   } else {
     dom.write('No images');
