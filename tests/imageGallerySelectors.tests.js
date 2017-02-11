@@ -4,48 +4,70 @@ import { getMockState } from './fixtures/getMockState.js';
 
 test('selectors - getImage :: return an image object from state',
   ({ deepEqual, end }) => {
-    const initialState = getMockState.withManyImages();
-    const actualState = selectors.getImage(initialState, '3');
-    const expectedState = {
+    const state = getMockState.withManyImages();
+    const actualImage = selectors.getImage(state, '3');
+    const expectedImage = {
       id: '3',
       src: 'http://placehold.it/100x100',
       title: 'Test Title 3'
     };
 
-    deepEqual(actualState, expectedState);
+    deepEqual(actualImage, expectedImage);
     end();
   }
 );
 
 test('selectors - getImage :: return an empty object if no images exist',
   ({ deepEqual, end }) => {
-    const initialState = getMockState.withoutImages();
-    const actualState = selectors.getImage(initialState, '3');
-    const expectedState = {};
+    const state = getMockState.withoutImages();
+    const actualImage = selectors.getImage(state, '3');
+    const expectedImage = {};
 
-    deepEqual(actualState, expectedState);
+    deepEqual(actualImage, expectedImage);
     end();
   }
 );
 
 test('selectors - getAllImages :: return an array of all image objects from state',
   ({ deepEqual, end }) => {
-    const initialState = getMockState.withManyImages();
-    const actualState = selectors.getAllImages(initialState);
-    const expectedState = [...initialState.byId];
+    const state = getMockState.withManyImages();
+    const actualImages = selectors.getAllImages(state);
+    const expectedImages = [...state.byId];
 
-    deepEqual(actualState, expectedState);
+    deepEqual(actualImages, expectedImages);
     end();
   }
 );
 
 test('selectors - getAllImages :: return an empty array if no images exist',
   ({ deepEqual, end }) => {
-    const initialState = getMockState.withoutImages();
-    const actualState = selectors.getAllImages(initialState);
-    const expectedState = [];
+    const state = getMockState.withoutImages();
+    const actualImages = selectors.getAllImages(state);
+    const expectedImages = [];
 
-    deepEqual(actualState, expectedState);
+    deepEqual(actualImages, expectedImages);
+    end();
+  }
+);
+
+test('selectors - getOpenImageId :: return id of the open Image',
+  ({ equal, end }) => {
+    const state = getMockState.withOneImage();
+    const actualId = selectors.getOpenImageId(state);
+    const expectedId = '1'
+
+    equal(actualId, expectedId)
+    end();
+  }
+);
+
+test('selectors - getOpenImageId :: return null if no image is open',
+  ({ equal, end }) => {
+    const state = getMockState.withoutImages();
+    const actualId = selectors.getOpenImageId(state);
+    const expectedId = null;
+
+    equal(actualId, expectedId)
     end();
   }
 );
