@@ -1,8 +1,10 @@
-const ImageThumbnailsCarousel = ({images = [], openImageId, openImageLightboxCarousel}) => {
-  const $d = document;
-  const rootImageGalleryNode = $d.getElementById('image-gallery-app');
+import dom from '../../public/utils/DOMUtils.js';
+import ThumbnailImage from './ThumbnailImage.js';
 
-  const div = $d.createElement('div');
+const ImageThumbnailsCarousel = ({images = [], openImageId, openImageLightboxCarousel}) => {
+  const rootImageGalleryNode = dom.getElementById('image-gallery-app');
+
+  const div = dom.createElement('div');
   div.textContent = 'Hello, Image Thumbnail Carousel!';
   rootImageGalleryNode.appendChild(div);
 
@@ -12,12 +14,14 @@ const ImageThumbnailsCarousel = ({images = [], openImageId, openImageLightboxCar
       <img src=`${image.src} alt=`${image.title}` width='100' height='100'>
     </div>
     */
-    images.map((image, index) => {
-      $d.write(`${index}: ${image.title}, `);
+    images.map((image, index, images) => {
+      dom.write(`${index}: ${image.title}, `);
+      rootImageGalleryNode.appendChild(ThumbnailImage({images, openImageId}));
     });
   } else {
-    $d.write('No images');
+    dom.write('No images');
   }
+
 
 };
 

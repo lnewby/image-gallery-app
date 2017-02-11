@@ -3,6 +3,11 @@ import { getMockState } from '../tests/fixtures/getMockState.js';
 import ImageThumbnailsCarousel from './views/ImageThumbnailsCarousel.js';
 
 const state = getMockState.withManyImages();
-const images = selectors.getAllImages(state);
+const {
+  getAllImages,
+  getOpenImageId
+} = selectors;
+const images = getAllImages(state);
+const openImageId = getOpenImageId(state);
 console.log(images);
-ImageThumbnailsCarousel({images, null, null});
+ImageThumbnailsCarousel({images, openImageId, null});
