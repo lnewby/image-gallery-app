@@ -1,7 +1,7 @@
 import test from 'tape';
 import * as reducers from '../app/reducers/imageGalleryReducers.js';
 import * as actions from '../app/actions/imageGalleryActions.js';
-import { getMockState } from './fixtures/getMockState.js'
+import { getMockState } from './fixtures/getMockState.js';
 
 test('reducers - byId :: Handle addImage action',
   ({ deepEqual, end }) => {

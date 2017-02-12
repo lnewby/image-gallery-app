@@ -1,5 +1,6 @@
 import test from 'tape';
 import * as actions from '../app/actions/imageGalleryActions.js';
+import { getMockState } from './fixtures/getMockState.js';
 
 test('action creator - addImage :: Create correct action',
   ({ deepEqual, end }) => {
@@ -51,9 +52,13 @@ test('action creator - removeAllImages :: Create correct action',
 
 test('action creator - nextImage :: Create correct action',
   ({ deepEqual, end }) => {
-    const actualAction = actions.nextImage();
+    const state = getMockState.withManyImages();
+    const actualAction = actions.nextImage(state);
     const expectedAction = {
-      type: 'NEXT_IMAGE'
+      type: 'NEXT_IMAGE',
+      payload: {
+        ids: state.ids
+      }
     };
 
     deepEqual(actualAction, expectedAction);
@@ -63,9 +68,13 @@ test('action creator - nextImage :: Create correct action',
 
 test('action creator - previousImage :: Create correct action',
   ({ deepEqual, end }) => {
-    const actualAction = actions.previousImage();
+    const state = getMockState.withManyImages();
+    const actualAction = actions.previousImage(state);
     const expectedAction = {
-      type: 'PREVIOUS_IMAGE'
+      type: 'PREVIOUS_IMAGE',
+      payload: {
+        ids: state.ids
+      }
     };
 
     deepEqual(actualAction, expectedAction);
