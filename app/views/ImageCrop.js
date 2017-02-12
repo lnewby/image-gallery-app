@@ -15,6 +15,7 @@ class ImageCrop {
     // </div>
 
     const croppedImageDiv = dom.createElement('div');
+    croppedImageDiv.style.cssText = 'margin: 5px 5px 0 5px';
     const img = dom.createElement('img');
     img.setAttribute('src', this.src);
     img.setAttribute('alt', this.alt);

@@ -19,6 +19,12 @@ class ImageThumbnailsCarousel {
 
   render() {
     const carouselWrapperDiv = dom.createElement('div');
+    carouselWrapperDiv.style.cssText = `
+      position: absolute;
+      display: flex;
+      padding: 5px;
+      box-shadow: rgba(50, 50, 50, 0.74902) 1px 1px 10px 0px
+    `;
     const { images } = this;
 
     if(images.length) {
@@ -32,11 +38,11 @@ class ImageThumbnailsCarousel {
         carouselWrapperDiv.appendChild(thumbnail.render());
       });
     } else {
-      carouselWrapperDiv.innerHtml('No thumbnail images ¯\_(ツ)_/¯');
+      carouselWrapperDiv.innerHTML = 'No thumbnail images ¯\\_(ツ)_/¯';
     }
 
     return carouselWrapperDiv;
   }
-};
+}
 
 export default ImageThumbnailsCarousel;
