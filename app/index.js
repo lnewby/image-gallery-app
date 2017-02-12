@@ -13,7 +13,6 @@ const props = {
   images: getAllImages(state),
   openImageId: getOpenImageId(state)
 };
-console.log(props.images);
 
 const rootImageGalleryNode = dom.getElementById('image-gallery-app');
 const carousel = new ImageThumbnailsCarousel(props);
