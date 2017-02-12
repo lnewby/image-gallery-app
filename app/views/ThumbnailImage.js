@@ -7,7 +7,8 @@ class ThumbnailImage {
     this.image = image;
     this.width = width;
     this.height = height;
-    console.log(this.image);
+    this.thumbnailImageDiv;
+    this.croppedImage;
   }
 
   render() {
@@ -19,9 +20,12 @@ class ThumbnailImage {
       width,
       height
     } = this;
-    const thumbnailImage = new ImageCrop({ src, alt, width, height });
+    this.thumbnailImageDiv = dom.createElement('div');
+    this.thumbnailImageDiv.classList.add('thumbnail-image-wrapper');
+    this.croppedImage = new ImageCrop({ src, alt, width, height });
+    this.thumbnailImageDiv.appendChild(this.croppedImage.render())
 
-    return thumbnailImage.render();
+    return this.thumbnailImageDiv;
   }
 }
 

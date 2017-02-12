@@ -1,25 +1,26 @@
 import dom from '../../public/utils/DOMUtils.js';
 
 class ImageCrop {
-  constructor({src, alt, width = 150, height = 150, classList = []}) {
+  constructor({src, alt, width = 150, height = 150, imgClassList = []}) {
     this.src = src;
     this.alt = alt;
     this.width = width;
     this.height = height;
-    this.classList = classList;
+    this.imgClassList = imgClassList;
   }
 
   render() {
-    // <div class=`${image}`>
-    //   <img src=`${src}` alt=`${alt}` class=`image-crop-img` />
-    // </div>
-
+    /*
+      <div class=`cropped-img-wrapper`>
+        <img src=`${this.src}` alt=`${this.alt}` />
+      </div>
+    */
     const croppedImageDiv = dom.createElement('div');
-    croppedImageDiv.style.cssText = 'margin: 5px 5px 0 5px';
+    croppedImageDiv.classList.add('cropped-img-wrapper');
     const img = dom.createElement('img');
     img.setAttribute('src', this.src);
     img.setAttribute('alt', this.alt);
-    img.classList.add(...this.classList);
+    img.classList.add(...this.imgClassList);
 
     croppedImageDiv.appendChild(img);
 

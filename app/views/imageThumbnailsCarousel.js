@@ -19,12 +19,7 @@ class ImageThumbnailsCarousel {
 
   render() {
     const carouselWrapperDiv = dom.createElement('div');
-    carouselWrapperDiv.style.cssText = `
-      position: absolute;
-      display: flex;
-      padding: 5px;
-      box-shadow: rgba(50, 50, 50, 0.74902) 1px 1px 10px 0px
-    `;
+    carouselWrapperDiv.classList.add('carousel-wrapper');
     const { images } = this;
 
     if(images.length) {
@@ -36,6 +31,7 @@ class ImageThumbnailsCarousel {
       images.map((image, index, images) => {
         const thumbnail = new ThumbnailImage({ images, image, width: 100, height: 100 });
         carouselWrapperDiv.appendChild(thumbnail.render());
+
       });
     } else {
       carouselWrapperDiv.innerHTML = 'No thumbnail images ¯\\_(ツ)_/¯';
