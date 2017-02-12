@@ -8,14 +8,13 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server"
+    "dev": "WEBPACK_ENV=dev webpack-dev-server",
+    "start": "http-server --port ${PORT:-9000} build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lnewby/image-gallery-app.git"
   },
-  "author": "Lance Newby",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/lnewby/image-gallery-app/issues"
   },
@@ -23,12 +22,27 @@
   "dependencies": {
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.22.0",
-    "webpack": "^2.2.1"
+    "babel-preset-es2015": "^6.22.0"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
     "tape": "^4.6.3",
+    "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
-  }
+  },
+  "keywords": [
+    "es6",
+    "less",
+    "tape",
+    "babel",
+    "webpack",
+    "webpack-dev-server"
+  ],
+  "author": "Lance Newby <lnewby@gmail.com>",
+  "license": "MIT"
 }

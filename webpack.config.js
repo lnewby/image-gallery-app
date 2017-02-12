@@ -5,7 +5,7 @@ var BUILD_DIR  = path.resolve(__dirname + '/build');
 var APP_DIR = path.resolve(__dirname + '/app');
 
 var config = {
-  entry: APP_DIR + '/index.js',
+  entry: [APP_DIR + '/index.js', APP_DIR + '/stylesheets/imageGallery.less'],
   output: {
     path: BUILD_DIR,
     filename: 'image-gallery-bundle.js',
@@ -26,6 +26,10 @@ var config = {
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
       }
     ]
   }
