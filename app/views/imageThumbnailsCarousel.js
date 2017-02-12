@@ -1,35 +1,42 @@
 import dom from '../../public/utils/DOMUtils.js';
 import ThumbnailImage from './ThumbnailImage.js';
 
-const ImageThumbnailsCarousel = ({images = [], thumbsPerPage, imageMarker, openImageLightboxCarousel}) => {
-  const imageGroup = () => {
-    const start = imageMarker;
-    const end = start + thumbsPerPage;
+class ImageThumbnailsCarousel {
 
-    return this.props.images.slice(start, end);
+  constructor({images = [], thumbsPerPage, imageMarker, openImageLightboxCarousel}) {
+    this.images = images;
+    this.thumbsPerPage = thumbsPerPage;
+    this.imageMarker = imageMarker;
+    this.openImageLightboxCarousel = openImageLightboxCarousel;
   }
 
-  const rootImageGalleryNode = dom.getElementById('image-gallery-app');
+  imageGroup() {
+    const start = this.imageMarker;
+    const end = start + this.thumbsPerPage;
 
-  const div = dom.createElement('div');
-  div.textContent = 'Hello, Image Thumbnail Carousel!';
-  rootImageGalleryNode.appendChild(div);
-
-  if(images.length) {
-    /*
-    <div>
-      <img src=`${image.src} alt=`${image.title}` width='100' height='100'>
-    </div>
-    */
-    images.map((image, index, images) => {
-      const thumbnail = new ThumbnailImage({ images, image, width: 100, height: 100 });
-      rootImageGalleryNode.appendChild(thumbnail.render());
-    });
-  } else {
-    dom.write('No images');
+    return this.images.slice(start, end);
   }
 
+  render() {
+    const carouselWrapperDiv = dom.createElement('div');
+    const { images } = this;
 
+    if(images.length) {
+      /*
+      <div>
+        <img src=`${image.src} alt=`${image.title}` width='100' height='100'>
+      </div>
+      */
+      images.map((image, index, images) => {
+        const thumbnail = new ThumbnailImage({ images, image, width: 100, height: 100 });
+        carouselWrapperDiv.appendChild(thumbnail.render());
+      });
+    } else {
+      carouselWrapperDiv.innerHtml('No thumbnail images ¯\_(ツ)_/¯');
+    }
+
+    return carouselWrapperDiv;
+  }
 };
 
 export default ImageThumbnailsCarousel;
