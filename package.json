@@ -7,9 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "WEBPACK_ENV=dev webpack-dev-server",
-    "start": "http-server --port ${PORT:-9000} build"
+    "test": "tape --require babel-register tests/*.tests.js | faucet",
+    "dev": "WEBPACK_ENV=dev webpack-dev-server"
   },
   "repository": {
     "type": "git",
