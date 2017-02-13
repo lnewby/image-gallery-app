@@ -1,9 +1,71 @@
+// Share variables allows for a consistent design style guide
+@import '../../public/stylesheets/variables.less';
+
+// Icons
+@font-face {
+  font-family: 'img-gallery-icons';
+  src: url('../font/img-gallery-icons.eot?84889234');
+  src: url('../font/img-gallery-icons.eot?84889234#iefix') format('embedded-opentype'),
+       url('../font/img-gallery-icons.woff?84889234') format('woff'),
+       url('../font/img-gallery-icons.ttf?84889234') format('truetype'),
+       url('../font/img-gallery-icons.svg?84889234#img-gallery-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // Mixins
+.icon(@icon) {
+  .icon-format;
+  .icon-content(@icon);
+}
+.icon-before(@icon) {
+  &:before{
+    .icon-format;
+    .icon-content(@icon);
+  }
+}
+.icon-after(@icon) {
+  &:after{
+    .icon-format;
+    .icon-content(@icon);
+  }
+}
+
+// included in all icons
+.icon-format{
+  font-family: "img-gallery-icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  text-decoration: inherit;
+  width: 1em;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// specific icon codes
+.icon-content(left-circled) { content: '\f0a8'; }
+.icon-content(right-circled) { content: '\f0a9'; }
+
+.icon-left-circled { .icon-before(left-circled); }
+.icon-right-circled { .icon-after(right-circled); }
+
+// Local Mixins
 .thumbnail-transition-mixin {
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 // Image Gallery Styles
+#image-gallery-app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 100%;
+}
+
 .cropped-img-wrapper {
   outline: none;
   margin-bottom: -4px;
@@ -12,6 +74,28 @@
 
 .carousel-wrapper {
   display: flex;
+
+  .carousel-arrow-controls {
+    background: @white;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    font-size: 1.5em;
+    opacity: 0.3;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .carousel-next-arrow {
+
+  }
+
+  .carousel-previous-arrow {
+
+  }
 }
 
 .thumbnail-image-wrapper {
@@ -26,26 +110,26 @@
   background-color: #fff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   .thumbnail-transition-mixin;
-}
 
-.thumbnail-image-wrapper::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  .thumbnail-transition-mixin;
-}
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    .thumbnail-transition-mixin;
+  }
 
-.thumbnail-image-wrapper:hover {
-  -webkit-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
-}
+  &:hover {
+    -webkit-transform: scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
 
-.thumbnail-image-wrapper:hover::after {
-    opacity: 1;
+    &:after {
+      opacity: 1;
+    }
+  }
 }

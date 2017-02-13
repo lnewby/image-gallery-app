@@ -28,9 +28,13 @@ var config = {
         }
       },
       {
+        /* test for transpiling, cleaning , styling, autoprefixing LESS files */
         test: /\.less$/,
         loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
-      }
+      },
+      {
+        /* test for handling customer font icons form fontello.com */
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
     ]
   }
 }

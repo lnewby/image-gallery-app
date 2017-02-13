@@ -11,7 +11,8 @@ const {
 
 const props = {
   images: getAllImages(state),
-  openImageId: getOpenImageId(state)
+  openImageId: getOpenImageId(state),
+  thumbsPerPage: 4
 };
 
 const rootImageGalleryNode = dom.getElementById('image-gallery-app');
