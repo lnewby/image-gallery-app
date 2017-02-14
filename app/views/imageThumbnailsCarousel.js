@@ -22,10 +22,12 @@ class ImageThumbnailsCarousel {
     const {
       images,
       thumbsPerPage,
+      startImageMarker,
       handleThumbnailImageSlider
     } = this;
     const nextArrowButton = dom.createElement('button');
     nextArrowButton.classList.add('icon-right-circled', 'carousel-arrow-controls');
+    nextArrowButton.disabled = (startImageMarker + thumbsPerPage >= images.length);
     nextArrowButton.setAttribute('aria-label', 'Next thumbnail images');
     nextArrowButton.addEventListener('click', (event) => handleThumbnailImageSlider({event, direction: 'next' }));
 
@@ -36,11 +38,13 @@ class ImageThumbnailsCarousel {
     const {
       images,
       thumbsPerPage,
+      startImageMarker,
       handleThumbnailImageSlider
     } = this;
 
     const previousArrowButton = dom.createElement('button');
     previousArrowButton.classList.add('icon-left-circled', 'carousel-arrow-controls');
+    previousArrowButton.disabled = (startImageMarker - thumbsPerPage < 0);
     previousArrowButton.setAttribute('aria-label', 'Previous thumbnail images');
     previousArrowButton.addEventListener('click', (e) => handleThumbnailImageSlider({event: e, direction: 'previous' }));
 
