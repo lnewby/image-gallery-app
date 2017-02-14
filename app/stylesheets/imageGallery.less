@@ -1,3 +1,6 @@
+// Reset page styles
+@import './cssResets.less';
+
 // Share variables allows for a consistent design style guide
 @import '../../public/stylesheets/variables.less';
 
@@ -82,9 +85,12 @@
     margin: 0px;
     font-size: 1.5em;
     opacity: 0.3;
-    cursor: pointer;
 
-    &:hover {
+    &:enabled {
+      cursor: pointer;
+    }
+
+    &:hover:enabled {
       opacity: 1;
     }
   }
@@ -105,8 +111,6 @@
   width: 110px;
   height: 110px;
   margin: 10px;
-  padding-bottom: 0px;
-  margin-bottom: 0px;
   background-color: #fff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   .thumbnail-transition-mixin;
