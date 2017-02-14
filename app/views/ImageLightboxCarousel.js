@@ -5,11 +5,11 @@ class ImageLightboxCarousel {
   constructor({
     images = [],
     openImageId,
-    closeImageLightboxCarousel
+    handleCloseImageLightboxCarousel
   }) {
     this.images = images;
     this.openImageId = openImageId;
-    this.closeImageLightboxCarousel = closeImageLightboxCarousel;
+    this.handleCloseImageLightboxCarousel = handleCloseImageLightboxCarousel;
     // this.thumbsPerPage = thumbsPerPage;
     // this.startImageMarker = startImageMarker;
     // this.openImageLightboxCarousel = openImageLightboxCarousel;
@@ -46,39 +46,30 @@ class ImageLightboxCarousel {
     return previousArrowButton;
   }
 
+  lightboxCloseButton() {
+    const lightboxCloseButton = dom.createElement('button');
+    lightboxCloseButton.classList.add('icon-cancel-circled', 'lightbox-close-btn')
+    lightboxCloseButton.setAttribute('aria-label', 'Lightbox close button');
+    lightboxCloseButton.addEventListener('click', (event) => this.handleCloseImageLightboxCarousel(event));
+
+    return lightboxCloseButton;
+  }
+
   render() {
     const lightboxWrapperDiv = dom.createElement('div');
 
     // setup carousel
     lightboxWrapperDiv.classList.add('lightbox-wrapper');
 
+    // add lightbox close button
+    lightboxWrapperDiv.appendChild(this.lightboxCloseButton());
+
     // add prev arrow navigation button
     lightboxWrapperDiv.appendChild(this.previousImageGroupArrow());
 
     if(this.images.length) {
-      /*
-      <div>
-        <img src=`${image.src} alt=`${image.title}` width='100' height='100'>
-      </div>
-      */
-      // this.getImagePartition().forEach((image, index, images) => {
-      //   const openImageLightboxCarousel = this.openImageLightboxCarousel;
-      //
-      //   const thumbnail = new ThumbnailImage({
-      //     images,
-      //     image,
-      //     width: 100,
-      //     height: 100,
-      //     openImageLightboxCarousel
-      //   });
-      //   lightboxWrapperDiv.appendChild(thumbnail.render());
-      // });
-
-      console.log(this.images);
-      console.log(`lightbox openImageId: ${this.openImageId}`);
-
       if (this.openImageId) {
-        const image = this.images[this.openImageId];
+        const image = this.images.filter((image) => image.id === this.openImageId)[0];
 
         // create image to display in lightbox
         const currentLightboxImage = dom.createElement('img');

@@ -7,14 +7,13 @@ class ImageThumbnailsCarousel {
     images = [],
     thumbsPerPage,
     startImageMarker,
-    openImageLightboxCarousel,
-    handleThumbnailImageSlider,
-    closeImageLightboxCarousel
+    handleOpenImageLightboxCarousel,
+    handleThumbnailImageSlider
   }) {
     this.images = images;
     this.thumbsPerPage = thumbsPerPage;
     this.startImageMarker = startImageMarker;
-    this.openImageLightboxCarousel = openImageLightboxCarousel;
+    this.handleOpenImageLightboxCarousel = handleOpenImageLightboxCarousel;
     this.handleThumbnailImageSlider = handleThumbnailImageSlider;
   }
 
@@ -73,14 +72,14 @@ class ImageThumbnailsCarousel {
       </div>
       */
       this.getImagePartition().forEach((image, index, images) => {
-        const openImageLightboxCarousel = this.openImageLightboxCarousel;
+        const handleOpenImageLightboxCarousel = this.handleOpenImageLightboxCarousel;
 
         const thumbnail = new ThumbnailImage({
           images,
           image,
           width: 100,
           height: 100,
-          openImageLightboxCarousel
+          handleOpenImageLightboxCarousel
         });
         carouselWrapperDiv.appendChild(thumbnail.render());
       });

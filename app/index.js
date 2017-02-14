@@ -42,7 +42,7 @@ const handleThumbnailImageSlider = ({ event, direction }) => {
   }
 };
 
-const openImageLightboxCarousel = ({event, id}) => {
+const handleOpenImageLightboxCarousel = ({event, id}) => {
   event.preventDefault();
 
   const state = store.getState();
@@ -52,10 +52,20 @@ const openImageLightboxCarousel = ({event, id}) => {
       id
     })
   );
+
+  // TODO: Add some Tracking here for analytics
 };
 
-const closeImageLightboxCarousel = (event) => {
+const handleCloseImageLightboxCarousel = (event) => {
+  event.preventDefault();
 
+  const state = store.getState();
+
+  store.dispatch(
+    actions.closeImageLightboxCarousel()
+  );
+
+  // TODO: Add some Tracking here for analytics
 };
 
 const render = () => {
@@ -74,8 +84,8 @@ const render = () => {
     images: getAllImages(state),
     openImageId: getOpenImageId(state),
     handleThumbnailImageSlider,
-    openImageLightboxCarousel,
-    closeImageLightboxCarousel
+    handleOpenImageLightboxCarousel,
+    handleCloseImageLightboxCarousel
   };
 
   const carousel = new ImageThumbnailsCarousel(props);

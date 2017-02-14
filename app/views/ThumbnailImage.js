@@ -2,17 +2,17 @@ import ImageCrop from './ImageCrop.js';
 import dom from '../../public/utils/DOMUtils.js';
 
 class ThumbnailImage {
-  constructor({ images, image, width, height, openImageLightboxCarousel }) {
+  constructor({ images, image, width, height, handleOpenImageLightboxCarousel }) {
     this.images = images;
     this.image = image;
     this.width = width;
     this.height = height;
-    this.openImageLightboxCarousel = openImageLightboxCarousel;
+    this.handleOpenImageLightboxCarousel = handleOpenImageLightboxCarousel;
   }
 
   render() {
     const {
-      openImageLightboxCarousel,
+      handleOpenImageLightboxCarousel,
       width,
       height,
       image: {
@@ -26,7 +26,7 @@ class ThumbnailImage {
     const croppedImage = new ImageCrop({ src, alt, width, height });
     thumbnailImageDiv.classList.add('thumbnail-image-wrapper');
     thumbnailImageDiv.setAttribute('id', id);
-    thumbnailImageDiv.addEventListener('click', (event) => openImageLightboxCarousel({event, id}));
+    thumbnailImageDiv.addEventListener('click', (event) => handleOpenImageLightboxCarousel({event, id}));
     thumbnailImageDiv.appendChild(croppedImage.render());
 
     return thumbnailImageDiv;
