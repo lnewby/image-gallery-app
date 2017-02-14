@@ -51,9 +51,23 @@
 // specific icon codes
 .icon-content(left-circled) { content: '\f0a8'; }
 .icon-content(right-circled) { content: '\f0a9'; }
+.icon-content(cancel-circled) { content: '\e800'; }
+.icon-content(spin5) { content: '\e838'; }
+.icon-content(firefox) { content: '\e840'; }
+.icon-content(chrome) { content: '\e841'; }
+.icon-content(opera) { content: '\e832'; }
+.icon-content(ie) { content: '\e833'; }
+.icon-content(resize-full-alt) { content: '\f0b2'; }
 
 .icon-left-circled { .icon-before(left-circled); }
 .icon-right-circled { .icon-after(right-circled); }
+.icon-cancel-circled { .icon-before(cancel-circled); }
+.icon-spin5 { .icon(spin5); }
+.icon-firefox { .icon(firefox); }
+.icon-chrome { .icon(chrome); }
+.icon-opera { .icon(opera); }
+.icon-ie { .icon(ie); }
+.icon-resize-full-alt { .icon(resize-full-alt); }
 
 // Local Mixins
 .thumbnail-transition-mixin {
@@ -68,8 +82,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 0px;
   background-color: @black;
   opacity: 0.5;
   z-index: 9999; /* place above everything */
@@ -85,12 +99,33 @@
     align-items: center;
     justify-content: center;
 
+    .lightbox-close-btn {
+      position: absolute;
+      background-color: transparent;
+      color: @white;
+      border: 0px;
+      padding: 5px;
+      margin: 0px;
+      right: 20px;
+      top: 20px;
+      font-size: 2.2em;
+      opacity: 0.6;
+
+      &:enabled {
+        cursor: pointer;
+      }
+
+      &:hover:enabled {
+        opacity: 1;
+      }
+    }
+
     .lighbox-arrow-controls {
       background-color: transparent;
       color: @white;
       border: 0px;
-      padding: 0px;
-      margin: 0px;
+      padding: 5px;
+      margin: 0px 20px;
       font-size: 2em;
       opacity: 0.5;
 
