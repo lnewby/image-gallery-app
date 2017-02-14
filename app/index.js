@@ -9,6 +9,32 @@ import ImageLightboxCarousel from './views/ImageLightboxCarousel.js';
 
 const store = createStore(imageGalleryReducers);
 
+const handleLightboxImageSlider = ({ event, direction }) => {
+  event.preventDefault();
+
+  const state = store.getState();
+
+  const { getIds } = selectors;
+
+  if (direction === 'next') {
+    store.dispatch(
+      actions.nextImage({
+        ids: getIds(state),
+      })
+    );
+
+    // TODO: Add some Tracking here for analytics
+  } else {
+    store.dispatch(
+      actions.previousImage({
+        ids: getIds(state),
+      })
+    );
+
+    // TODO: Add some Tracking here for analytics
+  }
+};
+
 const handleThumbnailImageSlider = ({ event, direction }) => {
   event.preventDefault();
 
@@ -16,9 +42,7 @@ const handleThumbnailImageSlider = ({ event, direction }) => {
 
   const {
     getIds,
-    getAllImages,
-    getThumbsPerPage,
-    getStartImageMarker
+    getThumbsPerPage
   } = selectors;
 
   if (direction === 'next') {
@@ -72,6 +96,7 @@ const render = () => {
   const state = store.getState();
 
   const {
+    getIds,
     getAllImages,
     getOpenImageId,
     getThumbsPerPage,
@@ -79,10 +104,12 @@ const render = () => {
   } = selectors;
 
   const props = {
+    ids: getIds(state),
     thumbsPerPage: getThumbsPerPage(state),
     startImageMarker: getStartImageMarker(state),
     images: getAllImages(state),
     openImageId: getOpenImageId(state),
+    handleLightboxImageSlider,
     handleThumbnailImageSlider,
     handleOpenImageLightboxCarousel,
     handleCloseImageLightboxCarousel

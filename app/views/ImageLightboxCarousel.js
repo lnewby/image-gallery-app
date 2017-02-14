@@ -3,45 +3,46 @@ import dom from '../../public/utils/DOMUtils.js';
 class ImageLightboxCarousel {
 
   constructor({
+    ids,
     images = [],
     openImageId,
+    handleLightboxImageSlider,
     handleCloseImageLightboxCarousel
   }) {
+    this.ids = ids;
     this.images = images;
     this.openImageId = openImageId;
+    this.handleLightboxImageSlider = handleLightboxImageSlider;
     this.handleCloseImageLightboxCarousel = handleCloseImageLightboxCarousel;
-    // this.thumbsPerPage = thumbsPerPage;
-    // this.startImageMarker = startImageMarker;
-    // this.openImageLightboxCarousel = openImageLightboxCarousel;
-    // this.handleThumbnailImageSlider = handleThumbnailImageSlider;
   }
 
   nextImageGroupArrow() {
     const {
-      images,
-      // startImageMarker
-      // handleLightboxImageSlider
+      ids,
+      openImageId,
+      handleLightboxImageSlider
     } = this;
     const nextArrowButton = dom.createElement('button');
     nextArrowButton.classList.add('icon-right-circled', 'lighbox-arrow-controls');
-    // nextArrowButton.disabled = (startImageMarker + 1 >= images.length);
-    nextArrowButton.setAttribute('aria-label', 'Next thumbnail images');
-    // nextArrowButton.addEventListener('click', (event) => handleLightboxImageSlider({event, direction: 'next' }));
+    nextArrowButton.disabled = (ids.indexOf(openImageId) + 1 >= ids.length);
+    nextArrowButton.setAttribute('aria-label', 'Next lightbox image');
+    nextArrowButton.addEventListener('click', (event) => handleLightboxImageSlider({event, direction: 'next' }));
 
     return nextArrowButton;
   }
 
   previousImageGroupArrow() {
-    // const {
-      // startImageMarker,
-      // handleLightboxImageSlider
-    // } = this;
+    const {
+      ids,
+      openImageId,
+      handleLightboxImageSlider
+    } = this;
 
     const previousArrowButton = dom.createElement('button');
     previousArrowButton.classList.add('icon-left-circled', 'lighbox-arrow-controls');
-    // previousArrowButton.disabled = (startImageMarker - 1 < 0);
-    previousArrowButton.setAttribute('aria-label', 'Previous thumbnail images');
-    // previousArrowButton.addEventListener('click', (event) => handleLightboxImageSlider({event, direction: 'previous' }));
+    previousArrowButton.disabled = (ids.indexOf(openImageId) - 1 < 0);
+    previousArrowButton.setAttribute('aria-label', 'Previous lightbox image');
+    previousArrowButton.addEventListener('click', (event) => handleLightboxImageSlider({event, direction: 'previous' }));
 
     return previousArrowButton;
   }
@@ -74,7 +75,7 @@ class ImageLightboxCarousel {
         // create image to display in lightbox
         const currentLightboxImage = dom.createElement('img');
         currentLightboxImage.setAttribute('src', image.src);
-        currentLightboxImage.setAttribute('alt', image.alt);
+        currentLightboxImage.setAttribute('alt', image.title);
         // currentLightboxImage.classList.add(...this.imgClassList);
         lightboxWrapperDiv.appendChild(currentLightboxImage)
 
