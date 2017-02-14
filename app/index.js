@@ -8,7 +8,7 @@ import ImageThumbnailsCarousel from './views/ImageThumbnailsCarousel.js';
 
 const store = createStore(imageGalleryReducers);
 
-const handleThumbnailImageSlider = function({event, direction}) {
+const handleThumbnailImageSlider = ({event, direction}) => {
   event.preventDefault();
 
   const state = store.getState();
@@ -41,6 +41,12 @@ const handleThumbnailImageSlider = function({event, direction}) {
   }
 };
 
+const openImageLightboxCarousel = (event) => {
+  event.preventDefault();
+
+  console.log('openImageLightboxCarousel');
+};
+
 const render = () => {
   const state = store.getState();
 
@@ -56,9 +62,10 @@ const render = () => {
     startImageMarker: getStartImageMarker(state),
     images: getAllImages(state),
     openImageId: getOpenImageId(state),
-    handleThumbnailImageSlider
+    handleThumbnailImageSlider,
+    openImageLightboxCarousel
   };
-  
+
   const carousel = new ImageThumbnailsCarousel(props);
   const rootImageGalleryNode = dom.getElementById('image-gallery-app');
 

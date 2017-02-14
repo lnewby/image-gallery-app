@@ -2,17 +2,17 @@ import ImageCrop from './ImageCrop.js';
 import dom from '../../public/utils/DOMUtils.js';
 
 class ThumbnailImage {
-  constructor({ images, image, width, height }) {
+  constructor({ images, image, width, height, openImageLightboxCarousel }) {
     this.images = images;
     this.image = image;
     this.width = width;
     this.height = height;
-    this.thumbnailImageDiv;
-    this.croppedImage;
+    this.openImageLightboxCarousel = openImageLightboxCarousel;
   }
 
   render() {
     const {
+      openImageLightboxCarousel,
       width,
       height,
       image: {
@@ -21,13 +21,14 @@ class ThumbnailImage {
         title: alt
       }
     } = this;
-    this.thumbnailImageDiv = dom.createElement('div');
-    this.thumbnailImageDiv.classList.add('thumbnail-image-wrapper');
-    this.thumbnailImageDiv.setAttribute('id', id);
-    this.croppedImage = new ImageCrop({ src, alt, width, height });
-    this.thumbnailImageDiv.appendChild(this.croppedImage.render());
+    const thumbnailImageDiv = dom.createElement('div');
+    const croppedImage = new ImageCrop({ src, alt, width, height });
+    thumbnailImageDiv.classList.add('thumbnail-image-wrapper');
+    thumbnailImageDiv.setAttribute('id', id);
+    thumbnailImageDiv.addEventListener('click', (event) => openImageLightboxCarousel(event));
+    thumbnailImageDiv.appendChild(croppedImage.render());
 
-    return this.thumbnailImageDiv;
+    return thumbnailImageDiv;
   }
 }
 

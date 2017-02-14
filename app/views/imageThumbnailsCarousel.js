@@ -3,7 +3,14 @@ import ThumbnailImage from './ThumbnailImage.js';
 
 class ImageThumbnailsCarousel {
 
-  constructor({ images = [], thumbsPerPage, startImageMarker, openImageLightboxCarousel, handleThumbnailImageSlider }) {
+  constructor({
+    images = [],
+    thumbsPerPage,
+    startImageMarker,
+    openImageLightboxCarousel,
+    handleThumbnailImageSlider,
+    closeImageLightboxCarousel
+  }) {
     this.images = images;
     this.thumbsPerPage = thumbsPerPage;
     this.startImageMarker = startImageMarker;
@@ -36,7 +43,6 @@ class ImageThumbnailsCarousel {
 
   previousImageGroupArrow() {
     const {
-      images,
       thumbsPerPage,
       startImageMarker,
       handleThumbnailImageSlider
@@ -46,7 +52,7 @@ class ImageThumbnailsCarousel {
     previousArrowButton.classList.add('icon-left-circled', 'carousel-arrow-controls');
     previousArrowButton.disabled = (startImageMarker - thumbsPerPage < 0);
     previousArrowButton.setAttribute('aria-label', 'Previous thumbnail images');
-    previousArrowButton.addEventListener('click', (e) => handleThumbnailImageSlider({event: e, direction: 'previous' }));
+    previousArrowButton.addEventListener('click', (event) => handleThumbnailImageSlider({event, direction: 'previous' }));
 
     return previousArrowButton;
   }
@@ -67,9 +73,16 @@ class ImageThumbnailsCarousel {
       </div>
       */
       this.getImagePartition().forEach((image, index, images) => {
-        const thumbnail = new ThumbnailImage({ images, image, width: 100, height: 100 });
-        carouselWrapperDiv.appendChild(thumbnail.render());
+        const openImageLightboxCarousel = this.openImageLightboxCarousel;
 
+        const thumbnail = new ThumbnailImage({
+          images,
+          image,
+          width: 100,
+          height: 100,
+          openImageLightboxCarousel
+        });
+        carouselWrapperDiv.appendChild(thumbnail.render());
       });
 
       // add next arrow navigation button
