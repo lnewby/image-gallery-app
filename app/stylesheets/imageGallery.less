@@ -79,17 +79,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  background-color: @black;
-  opacity: 0.5;
-  z-index: 9999; /* place above everything */
+  z-index: 100; /* place above everything */
 
   &.hidden {
     display: none;
+  }
+
+  .lighbox-transparent-gray-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: @black;
+    opacity: 0.75;
+    z-index: 300;
   }
 
   .lightbox-wrapper {
@@ -98,6 +102,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    z-index: 200;
 
     .lightbox-close-btn {
       position: absolute;
@@ -109,7 +114,8 @@
       right: 20px;
       top: 20px;
       font-size: 2.2em;
-      opacity: 0.6;
+      opacity: 0.5;
+      z-index: 999;
 
       &:enabled {
         cursor: pointer;
@@ -128,6 +134,7 @@
       margin: 0px 20px;
       font-size: 2em;
       opacity: 0.5;
+      z-index: 999;
 
       &:enabled {
         cursor: pointer;
@@ -136,6 +143,11 @@
       &:hover:enabled {
         opacity: 1;
       }
+    }
+
+    .lightbox-img-wrapper {
+      padding: 15px;
+      z-index: 999;
     }
   }
 }

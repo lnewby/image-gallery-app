@@ -58,9 +58,14 @@ class ImageLightboxCarousel {
 
   render() {
     const lightboxWrapperDiv = dom.createElement('div');
+    const lightboxGrayOverlayDiv = dom.createElement('div');
 
     // setup carousel
+    lightboxGrayOverlayDiv.classList.add('lighbox-transparent-gray-bg');
     lightboxWrapperDiv.classList.add('lightbox-wrapper');
+
+    // add lighbox full screen transparent overlay
+    lightboxWrapperDiv.appendChild(lightboxGrayOverlayDiv);
 
     // add lightbox close button
     lightboxWrapperDiv.appendChild(this.lightboxCloseButton());
@@ -73,11 +78,16 @@ class ImageLightboxCarousel {
         const image = this.images.filter((image) => image.id === this.openImageId)[0];
 
         // create image to display in lightbox
+        const lightboxImageWrapperDiv = dom.createElement('div');
         const currentLightboxImage = dom.createElement('img');
+
+        // add style & attributes
+        lightboxImageWrapperDiv.classList.add('lightbox-img-wrapper');
+        currentLightboxImage.classList.add('lightbox-img');
         currentLightboxImage.setAttribute('src', image.src);
         currentLightboxImage.setAttribute('alt', image.title);
-        // currentLightboxImage.classList.add(...this.imgClassList);
-        lightboxWrapperDiv.appendChild(currentLightboxImage)
+        lightboxImageWrapperDiv.appendChild(currentLightboxImage);
+        lightboxWrapperDiv.appendChild(lightboxImageWrapperDiv);
 
         // add next arrow navigation button
         lightboxWrapperDiv.appendChild(this.nextImageGroupArrow());
