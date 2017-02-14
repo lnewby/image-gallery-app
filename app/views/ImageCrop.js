@@ -18,7 +18,7 @@ class ImageCrop {
     const croppedImageDiv = dom.createElement('div');
     croppedImageDiv.classList.add('cropped-img-wrapper');
     const img = dom.createElement('img');
-    img.setAttribute('src', this.src);
+    img.setAttribute('src', this.src.thumbnail);
     img.setAttribute('alt', this.alt);
     img.classList.add(...this.imgClassList);
 

@@ -1,7 +1,9 @@
-import { getMockState } from '../../tests/fixtures/getMockState.js';
+// Use this import to get mock state data for testing
+// i.e., let state = getMockState.withManyImages();
+// import { getMockState } from '../../tests/fixtures/getMockState.js';
 
 const createStore = (reducer) => {
-  let state = getMockState.withManyImages();
+  let state = [];
   let listeners = [];
 
   const getState = () => state;

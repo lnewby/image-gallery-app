@@ -53,15 +53,28 @@ export const openImageId = (state = null, { type, payload }) => {
   }
 }
 
-export const startImageMarker = (state = null, { type, payload }) => {
+export const currentPage = (state = null, { type, payload }) => {
   switch (type) {
     case 'NEXT_IMAGE_GROUP':
-      const nextGroupImageMarker = state + payload.thumbsPerPage;
-      return (nextGroupImageMarker < payload.ids.length) ? nextGroupImageMarker : state;
+      const nextPage =  state + 1;
+      return (nextPage <= payload.totalPages) ? nextPage : state;
 
     case 'PREVIOUS_IMAGE_GROUP':
-      const previouisImageMarker = state - payload.thumbsPerPage;
-      return (previouisImageMarker >= 0) ? previouisImageMarker : state;
+      const previousPage = state - 1;
+      return (previousPage > 0) ? previousPage : state;
+
+    case 'SET_CURRENT_PAGE':
+      return payload.currentPage;
+
+    default:
+      return state;
+  }
+}
+
+export const totalPages = (state = null, { type, payload }) => {
+  switch (type) {
+    case 'SET_TOTAL_PAGES':
+      return payload.totalPages;
 
     default:
       return state;
@@ -70,11 +83,18 @@ export const startImageMarker = (state = null, { type, payload }) => {
 
 export const thumbsPerPage = (state = null, { type, payload }) => {
   switch (type) {
-    case 'NEXT_IMAGE_GROUP':
+    case 'SET_THUMBS_PER_PAGE':
       return payload.thumbsPerPage;
 
-    case 'PREVIOUS_IMAGE_GROUP':
-      return payload.thumbsPerPage;
+    default:
+      return state;
+  }
+}
+
+export const imageSearchText = (state = null, { type, payload }) => {
+  switch (type) {
+    case 'SET_IMAGE_SEARCH_TEXT':
+      return payload.imageSearchText;
 
     default:
       return state;
@@ -95,12 +115,20 @@ export const imageGalleryReducers = (state = [], action) => {
       state.openImageId,
       action
     ),
-    startImageMarker: startImageMarker(
-      state.startImageMarker,
-      action
-    ),
     thumbsPerPage: thumbsPerPage(
       state.thumbsPerPage,
+      action
+    ),
+    currentPage: currentPage(
+      state.currentPage,
+      action
+    ),
+    totalPages: totalPages(
+      state.totalPages,
+      action
+    ),
+    imageSearchText: imageSearchText(
+      state.imageSearchText,
       action
     )
   }

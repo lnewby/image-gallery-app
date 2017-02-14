@@ -5,35 +5,28 @@ class ImageThumbnailsCarousel {
 
   constructor({
     images = [],
-    thumbsPerPage,
-    startImageMarker,
+    totalPages,
+    currentPage,
     handleOpenImageLightboxCarousel,
     handleThumbnailImageSlider
   }) {
     this.images = images;
-    this.thumbsPerPage = thumbsPerPage;
-    this.startImageMarker = startImageMarker;
+    this.totalPages = totalPages;
+    this.currentPage = currentPage;
     this.handleOpenImageLightboxCarousel = handleOpenImageLightboxCarousel;
     this.handleThumbnailImageSlider = handleThumbnailImageSlider;
-  }
-
-  getImagePartition() {
-    const start = this.startImageMarker;
-    const end = start + this.thumbsPerPage;
-
-    return this.images.slice(start, end);
   }
 
   nextImageGroupArrow() {
     const {
       images,
-      thumbsPerPage,
-      startImageMarker,
+      totalPages,
+      currentPage,
       handleThumbnailImageSlider
     } = this;
     const nextArrowButton = dom.createElement('button');
     nextArrowButton.classList.add('icon-right-circled', 'carousel-arrow-controls');
-    nextArrowButton.disabled = (startImageMarker + thumbsPerPage >= images.length);
+    nextArrowButton.disabled = (currentPage + 1 >= totalPages);
     nextArrowButton.setAttribute('aria-label', 'Next thumbnail images');
     nextArrowButton.addEventListener('click', (event) => handleThumbnailImageSlider({event, direction: 'next' }));
 
@@ -42,14 +35,13 @@ class ImageThumbnailsCarousel {
 
   previousImageGroupArrow() {
     const {
-      thumbsPerPage,
-      startImageMarker,
+      currentPage,
       handleThumbnailImageSlider
     } = this;
 
     const previousArrowButton = dom.createElement('button');
     previousArrowButton.classList.add('icon-left-circled', 'carousel-arrow-controls');
-    previousArrowButton.disabled = (startImageMarker - thumbsPerPage < 0);
+    previousArrowButton.disabled = (currentPage - 1 < 1);
     previousArrowButton.setAttribute('aria-label', 'Previous thumbnail images');
     previousArrowButton.addEventListener('click', (event) => handleThumbnailImageSlider({event, direction: 'previous' }));
 
@@ -71,7 +63,7 @@ class ImageThumbnailsCarousel {
         <img src=`${image.src} alt=`${image.title}` width='100' height='100'>
       </div>
       */
-      this.getImagePartition().forEach((image, index, images) => {
+      this.images.forEach((image, index, images) => {
         const handleOpenImageLightboxCarousel = this.handleOpenImageLightboxCarousel;
 
         const thumbnail = new ThumbnailImage({

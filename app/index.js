@@ -5,9 +5,28 @@ import * as selectors from './selectors/imageGallerySelectors.js';
 import { imageGalleryReducers } from './reducers/imageGalleryReducers.js';
 import ImageThumbnailsCarousel from './views/ImageThumbnailsCarousel.js';
 import ImageLightboxCarousel from './views/ImageLightboxCarousel.js';
+import ImageGalleryAPI from './api/imageGalleryAPI.js';
 
-
+// Setup store management
 const store = createStore(imageGalleryReducers);
+
+// Setup number of thumbnails images per page
+store.dispatch(
+  actions.setThumbsPerPage(4)
+);
+
+// Initial total number of page return by api
+store.dispatch(
+  actions.setTotalPages(100)
+);
+
+// Setup current page number of thumbnail image displaying
+store.dispatch(
+  actions.setCurrentPage({
+    currentPage: 1,
+    totalPages: selectors.getTotalPages(store.getState())
+  })
+);
 
 const handleLightboxImageSlider = ({ event, direction }) => {
   event.preventDefault();
@@ -38,28 +57,37 @@ const handleLightboxImageSlider = ({ event, direction }) => {
 const handleThumbnailImageSlider = ({ event, direction }) => {
   event.preventDefault();
 
-  const state = store.getState();
-
   const {
     getIds,
-    getThumbsPerPage
+    getTotalPages
   } = selectors;
 
   if (direction === 'next') {
+    // get next set of images if possible
+    fetchFlickrPhotos({
+      text: selectors.getImageSearchText(store.getState()),
+      per_page: selectors.getThumbsPerPage(store.getState()),
+      page: selectors.getCurrentPage(store.getState()) + 1
+    });
+
     store.dispatch(
       actions.nextImageGroup({
-        ids: getIds(state),
-        thumbsPerPage: getThumbsPerPage(state)
+        ids: getIds(store.getState()),
+        totalPages: getTotalPages(store.getState())
       })
     );
 
     // TODO: Add some Tracking here for analytics
   } else {
+    // get previous set of images if possible
+    fetchFlickrPhotos({
+      text: selectors.getImageSearchText(store.getState()),
+      per_page: selectors.getThumbsPerPage(store.getState()),
+      page: selectors.getCurrentPage(store.getState()) - 1
+    });
+
     store.dispatch(
-      actions.previousImageGroup({
-        ids: getIds(state),
-        thumbsPerPage: getThumbsPerPage(state)
-      })
+      actions.previousImageGroup()
     );
 
     // TODO: Add some Tracking here for analytics
@@ -92,21 +120,80 @@ const handleCloseImageLightboxCarousel = (event) => {
   // TODO: Add some Tracking here for analytics
 };
 
-const render = () => {
-  const state = store.getState();
+const fetchFlickrPhotos = ({text, per_page, page}) => {
+  // Update image search text in state
+  store.dispatch(
+    actions.setImageSearchText(text)
+  )
 
+  // create request object
+  const flickrRequest = { text, per_page, page };
+
+  // fetch the set of images fro Flickr
+  ImageGalleryAPI.fetchFlickrPhotos(flickrRequest)
+    .then(JSON.parse)
+    .then((data) => {
+      // clear current set of images from state
+      store.dispatch(
+        actions.removeAllImages()
+      );
+
+      const {
+        photos: {
+          page,
+          pages,
+          photo: photos
+        }
+      } = data;
+      photos.forEach((photo) => {
+        const {
+          farm,
+          id,
+          isfamily,
+          isfriend,
+          ispublic,
+          owner,
+          secret,
+          server,
+          title
+        } = photo;
+
+        // build photo urls for different sizes
+        const src = {
+          'thumbnail': `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_t.jpg`,
+          'medium': `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_m.jpg`,
+          'large': `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_h.jpg`
+        };
+
+        // Add iimage to set
+        store.dispatch(
+          actions.addImage(id, src, title)
+        );
+
+        // Update total pages in state
+        store.dispatch(
+          actions.setTotalPages(pages)
+        );
+      });
+    });
+}
+
+const render = () => {
+  // Fetch photos and setup state
+  const state = store.getState();
   const {
     getIds,
     getAllImages,
     getOpenImageId,
     getThumbsPerPage,
-    getStartImageMarker
+    getTotalPages,
+    getCurrentPage
   } = selectors;
 
   const props = {
     ids: getIds(state),
-    thumbsPerPage: getThumbsPerPage(state),
-    startImageMarker: getStartImageMarker(state),
+    currentPage: getCurrentPage(state),
+    totalPages: getTotalPages(state),
     images: getAllImages(state),
     openImageId: getOpenImageId(state),
     handleLightboxImageSlider,
@@ -133,4 +220,13 @@ const render = () => {
 };
 
 store.subscribe(render);
+
+// Now get the initial stote set of imnage from Flickr
+fetchFlickrPhotos({
+  text: 'kittens',
+  per_page: selectors.getThumbsPerPage(store.getState()),
+  page: selectors.getCurrentPage(store.getState())
+});
+
+// Do the initial page render
 render();
