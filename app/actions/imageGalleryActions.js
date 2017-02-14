@@ -50,7 +50,7 @@ export const previousImageGroup = ({ids, thumbsPerPage}) => ({
   }
 });
 
-export const openImageLightboxCarousel = (id) => ({
+export const openImageLightboxCarousel = ({id}) => ({
   type: 'OPEN_IMAGE_LIGHTBOX_CAROUSEL',
   payload: {
     id

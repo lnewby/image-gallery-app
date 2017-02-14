@@ -4,11 +4,12 @@ import * as actions from './actions/imageGalleryActions.js';
 import * as selectors from './selectors/imageGallerySelectors.js';
 import { imageGalleryReducers } from './reducers/imageGalleryReducers.js';
 import ImageThumbnailsCarousel from './views/ImageThumbnailsCarousel.js';
+import ImageLightboxCarousel from './views/ImageLightboxCarousel.js';
 
 
 const store = createStore(imageGalleryReducers);
 
-const handleThumbnailImageSlider = ({event, direction}) => {
+const handleThumbnailImageSlider = ({ event, direction }) => {
   event.preventDefault();
 
   const state = store.getState();
@@ -41,10 +42,20 @@ const handleThumbnailImageSlider = ({event, direction}) => {
   }
 };
 
-const openImageLightboxCarousel = (event) => {
+const openImageLightboxCarousel = ({event, id}) => {
   event.preventDefault();
 
-  console.log('openImageLightboxCarousel');
+  const state = store.getState();
+
+  store.dispatch(
+    actions.openImageLightboxCarousel({
+      id
+    })
+  );
+};
+
+const closeImageLightboxCarousel = (event) => {
+
 };
 
 const render = () => {
@@ -63,14 +74,25 @@ const render = () => {
     images: getAllImages(state),
     openImageId: getOpenImageId(state),
     handleThumbnailImageSlider,
-    openImageLightboxCarousel
+    openImageLightboxCarousel,
+    closeImageLightboxCarousel
   };
 
   const carousel = new ImageThumbnailsCarousel(props);
+  const lightbox = new ImageLightboxCarousel(props);
   const rootImageGalleryNode = dom.getElementById('image-gallery-app');
+  const rootLightboxNode = dom.getElementById('lightbox');
 
   rootImageGalleryNode.innerHTML = '';
+  rootLightboxNode.innerHTML = '';
+
+  if (props.openImageId) {
+    rootLightboxNode.classList.remove('hidden');
+  } else {
+    rootLightboxNode.classList.add('hidden');
+  }
   rootImageGalleryNode.appendChild(carousel.render());
+  rootLightboxNode.appendChild(lightbox.render());
 };
 
 store.subscribe(render);

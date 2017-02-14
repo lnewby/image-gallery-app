@@ -21,11 +21,12 @@ class ThumbnailImage {
         title: alt
       }
     } = this;
+
     const thumbnailImageDiv = dom.createElement('div');
     const croppedImage = new ImageCrop({ src, alt, width, height });
     thumbnailImageDiv.classList.add('thumbnail-image-wrapper');
     thumbnailImageDiv.setAttribute('id', id);
-    thumbnailImageDiv.addEventListener('click', (event) => openImageLightboxCarousel(event));
+    thumbnailImageDiv.addEventListener('click', (event) => openImageLightboxCarousel({event, id}));
     thumbnailImageDiv.appendChild(croppedImage.render());
 
     return thumbnailImageDiv;

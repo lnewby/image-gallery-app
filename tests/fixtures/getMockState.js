@@ -70,7 +70,7 @@ export const getMockState = {
       }
     },
     ids: ['1', '2', '3', '4', '5', '6', '7'],
-    openImageId: '4',
+    openImageId: null,
     thumbsPerPage: 4,
     startImageMarker: 0
   })
