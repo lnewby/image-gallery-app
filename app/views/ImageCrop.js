@@ -1,7 +1,7 @@
 import dom from '../../public/utils/DOMUtils.js';
 
 class ImageCrop {
-  constructor({src, alt, width = 150, height = 150, imgClassList = []}) {
+  constructor({ src, alt, width = 150, height = 150, imgClassList = [] }) {
     this.src = src;
     this.alt = alt;
     this.width = width;

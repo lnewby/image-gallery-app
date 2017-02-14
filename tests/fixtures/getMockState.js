@@ -12,7 +12,9 @@ export const getMockState = {
   withoutImages: () => ({
     byId: {},
     ids: [],
-    openImageId: null
+    openImageId: null,
+    startImageMarker: 0,
+    thumbsPerPage: null
   }),
 
   withOneImage: () => ({
@@ -24,7 +26,9 @@ export const getMockState = {
       }
     },
     ids: ['1'],
-    openImageId: '1'
+    openImageId: '1',
+    startImageMarker: 0,
+    thumbsPerPage: 1
   }),
 
   withManyImages: () => ({
@@ -66,6 +70,8 @@ export const getMockState = {
       }
     },
     ids: ['1', '2', '3', '4', '5', '6', '7'],
-    openImageId: '4'
+    openImageId: '4',
+    thumbsPerPage: 4,
+    startImageMarker: 0
   })
-}
+};

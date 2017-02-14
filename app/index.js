@@ -1,21 +1,70 @@
 import dom from '../public/utils/DOMUtils.js';
+import createStore from './store/createStore.js';
+import * as actions from './actions/imageGalleryActions.js';
 import * as selectors from './selectors/imageGallerySelectors.js';
-import { getMockState } from '../tests/fixtures/getMockState.js';
+import { imageGalleryReducers } from './reducers/imageGalleryReducers.js';
 import ImageThumbnailsCarousel from './views/ImageThumbnailsCarousel.js';
 
-const state = getMockState.withManyImages();
-const {
-  getAllImages,
-  getOpenImageId
-} = selectors;
 
-const props = {
-  images: getAllImages(state),
-  openImageId: getOpenImageId(state),
-  thumbsPerPage: 4
+const store = createStore(imageGalleryReducers);
+
+const handleThumbnailImageSlider = function({event, direction}) {
+  event.preventDefault();
+
+  const state = store.getState();
+
+  const {
+    getIds,
+    getAllImages,
+    getThumbsPerPage,
+    getStartImageMarker
+  } = selectors;
+
+  if (direction === 'next') {
+    store.dispatch(
+      actions.nextImageGroup({
+        ids: getIds(state),
+        thumbsPerPage: getThumbsPerPage(state)
+      })
+    );
+
+    // TODO: Add some Tracking here for analytics
+  } else {
+    store.dispatch(
+      actions.previousImageGroup({
+        ids: getIds(state),
+        thumbsPerPage: getThumbsPerPage(state)
+      })
+    );
+
+    // TODO: Add some Tracking here for analytics
+  }
 };
 
-const rootImageGalleryNode = dom.getElementById('image-gallery-app');
-const carousel = new ImageThumbnailsCarousel(props);
+const render = () => {
+  const state = store.getState();
 
-rootImageGalleryNode.appendChild(carousel.render());
+  const {
+    getAllImages,
+    getOpenImageId,
+    getThumbsPerPage,
+    getStartImageMarker
+  } = selectors;
+
+  const props = {
+    thumbsPerPage: getThumbsPerPage(state),
+    startImageMarker: getStartImageMarker(state),
+    images: getAllImages(state),
+    openImageId: getOpenImageId(state),
+    handleThumbnailImageSlider
+  };
+  
+  const carousel = new ImageThumbnailsCarousel(props);
+  const rootImageGalleryNode = dom.getElementById('image-gallery-app');
+
+  rootImageGalleryNode.innerHTML = '';
+  rootImageGalleryNode.appendChild(carousel.render());
+};
+
+store.subscribe(render);
+render();

@@ -52,3 +52,56 @@ export const openImageId = (state = null, { type, payload }) => {
       return state;
   }
 }
+
+export const startImageMarker = (state = null, { type, payload }) => {
+  switch (type) {
+    case 'NEXT_IMAGE_GROUP':
+      const nextGroupImageMarker = state + payload.thumbsPerPage;
+      return (nextGroupImageMarker < payload.ids.length) ? nextGroupImageMarker : state;
+
+    case 'PREVIOUS_IMAGE_GROUP':
+      const previouisImageMarker = state - payload.thumbsPerPage;
+      return (previouisImageMarker >= 0) ? previouisImageMarker : state;
+
+    default:
+      return state;
+  }
+}
+
+export const thumbsPerPage = (state = null, { type, payload }) => {
+  switch (type) {
+    case 'NEXT_IMAGE_GROUP':
+      return payload.thumbsPerPage;
+
+    case 'PREVIOUS_IMAGE_GROUP':
+      return payload.thumbsPerPage;
+
+    default:
+      return state;
+  }
+}
+
+export const imageGalleryReducers = (state = [], action) => {
+  return {
+    byId: byId(
+      state.byId,
+      action
+    ),
+    ids: ids(
+      state.ids,
+      action
+    ),
+    openImageId: openImageId(
+      state.openImageId,
+      action
+    ),
+    startImageMarker: startImageMarker(
+      state.startImageMarker,
+      action
+    ),
+    thumbsPerPage: thumbsPerPage(
+      state.thumbsPerPage,
+      action
+    )
+  }
+}

@@ -27,10 +27,26 @@ export const nextImage = ({ids}) => ({
   }
 });
 
+export const nextImageGroup = ({ids, thumbsPerPage}) => ({
+  type: 'NEXT_IMAGE_GROUP',
+  payload: {
+    ids,
+    thumbsPerPage
+  }
+});
+
 export const previousImage = ({ids}) => ({
   type: 'PREVIOUS_IMAGE',
   payload: {
     ids
+  }
+});
+
+export const previousImageGroup = ({ids, thumbsPerPage}) => ({
+  type: 'PREVIOUS_IMAGE_GROUP',
+  payload: {
+    ids,
+    thumbsPerPage
   }
 });
 
@@ -43,4 +59,18 @@ export const openImageLightboxCarousel = (id) => ({
 
 export const closeImageLightboxCarousel = () => ({
   type: 'CLOSE_IMAGE_LIGHTBOX_CAROUSEL'
+});
+
+export const setThumbsPerPage = (thumbsPerPage) => ({
+  type: 'SET_THUMBS_PER_PAGE',
+  payload: {
+    thumbsPerPage
+  }
+});
+
+export const setStartImageMarker = (startImageMarker) => ({
+  type: 'SET_START_IMAGE_MARKER',
+  payload: {
+    startImageMarker
+  }
 });
