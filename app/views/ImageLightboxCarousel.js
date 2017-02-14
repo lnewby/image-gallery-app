@@ -76,18 +76,20 @@ class ImageLightboxCarousel {
 
       console.log(this.images);
       console.log(`lightbox openImageId: ${this.openImageId}`);
-      const image = this.images[this.openImageId];
 
-      // create image to display in lightbox
-      const currentLightboxImage = dom.createElement('img');
-      // currentLightboxImage.setAttribute('src', image.src);
-      // currentLightboxImage.setAttribute('alt', image.alt);
-      // currentLightboxImage.classList.add(...this.imgClassList);
-      lightboxWrapperDiv.appendChild(currentLightboxImage)
+      if (this.openImageId) {
+        const image = this.images[this.openImageId];
 
-      // add next arrow navigation button
-      lightboxWrapperDiv.appendChild(this.nextImageGroupArrow());
+        // create image to display in lightbox
+        const currentLightboxImage = dom.createElement('img');
+        currentLightboxImage.setAttribute('src', image.src);
+        currentLightboxImage.setAttribute('alt', image.alt);
+        // currentLightboxImage.classList.add(...this.imgClassList);
+        lightboxWrapperDiv.appendChild(currentLightboxImage)
 
+        // add next arrow navigation button
+        lightboxWrapperDiv.appendChild(this.nextImageGroupArrow());
+      }
     } else {
       lightboxWrapperDiv.innerHTML = 'Oh no, where\'d the images go? ¯\\_(ツ)_/¯';
     }
