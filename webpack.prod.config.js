@@ -8,8 +8,8 @@ var config = {
   entry: [APP_DIR + '/index.js', APP_DIR + '/stylesheets/imageGallery.less'],
   output: {
     path: BUILD_DIR,
-    filename: 'image-gallery-bundle.js',
-    publicPath: '/'
+    filename: 'bundle.js',
+    publicPath: '/public/'
   },
   devtool: 'source-map',
   module: {
