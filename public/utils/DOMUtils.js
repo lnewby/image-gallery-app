@@ -1,3 +1,4 @@
+// TODO: build out library to handle DOM API manipulation
 export const dom = document;
 
 export const checkImageLoaded = ( path ) => {

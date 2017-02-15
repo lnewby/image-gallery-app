@@ -2,6 +2,7 @@
 // i.e., let state = getMockState.withManyImages();
 // import { getMockState } from '../../tests/fixtures/getMockState.js';
 
+// A basic store to handle state manipulation
 const createStore = (reducer) => {
   let state = [];
   let listeners = [];
@@ -9,14 +10,12 @@ const createStore = (reducer) => {
   const getState = () => state;
 
   const dispatch = (action) => {
-    console.log(`dispatching: ${JSON.stringify(action)}`);
     state = reducer(state, action);
 
     listeners.forEach(listener => listener());
   };
 
   const subscribe = (listener) => {
-    console.log(`subscribing: ${listener}`);
     listeners = [...listeners, listener];
 
     return () => {

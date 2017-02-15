@@ -37,7 +37,7 @@ test('selectors - getAllImages :: return an array of all image objects from stat
       src: 'http://placehold.it/100x100',
       title: 'Test Title'
     }];
-    console.log(expectedImages);
+
     deepEqual(actualImages, expectedImages);
     end();
   }

@@ -101,6 +101,7 @@ export const imageSearchText = (state = null, { type, payload }) => {
   }
 }
 
+// Wrap all reducers into one object to for easier dispatching
 export const imageGalleryReducers = (state = [], action) => {
   return {
     byId: byId(
