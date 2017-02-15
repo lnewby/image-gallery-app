@@ -84,7 +84,7 @@ class ImageLightboxCarousel {
         // add style & attributes
         lightboxImageWrapperDiv.classList.add('lightbox-img-wrapper');
         currentLightboxImage.classList.add('lightbox-img');
-        currentLightboxImage.setAttribute('src', image.src.large);
+        currentLightboxImage.setAttribute('src', image.src.medium);
         currentLightboxImage.setAttribute('alt', image.title);
         lightboxImageWrapperDiv.appendChild(currentLightboxImage);
         lightboxWrapperDiv.appendChild(lightboxImageWrapperDiv);

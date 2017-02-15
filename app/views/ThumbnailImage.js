@@ -34,6 +34,7 @@ class ThumbnailImage {
     loadingIconWrapper.appendChild(loadingIcon);
     thumbnailImageDiv.appendChild(loadingIconWrapper);
 
+    // Use promise to handle display of spinner for image loading
     const imagePromise = croppedImage.render();
     imagePromise.then((data) => {
       loadingIcon.classList.remove('icon-spin5');
