@@ -10,7 +10,7 @@ _This application demonstrate:
 ## Quick start
 To build everything in development mode, start the application, and setup a `watch` task in order to live recompile when files change:
 ```
-git https://github.com/lnewby/image-gallery-app.git
+git clone https://github.com/lnewby/image-gallery-app.git
 npm install
 npm run dev
 
