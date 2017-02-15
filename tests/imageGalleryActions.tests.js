@@ -85,7 +85,7 @@ test('action creator - previousImage :: Create correct action',
 test('action creator - openImageLightboxCarousel :: Create correct action',
   ({ deepEqual, end }) => {
     const id = '1';
-    const actualAction = actions.openImageLightboxCarousel(id);
+    const actualAction = actions.openImageLightboxCarousel({id});
     const expectedAction = {
       type: 'OPEN_IMAGE_LIGHTBOX_CAROUSEL',
       payload: {

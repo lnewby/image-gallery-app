@@ -94,7 +94,7 @@ test('reducers - openImageId :: Handle nextImage action',
       initialState.openImageId,
       actions.nextImage(initialState)
     );
-    const expectedState = '5';
+    const expectedState = '6';
 
     equal(actualState, expectedState);
     end();
@@ -122,7 +122,7 @@ test('reducers - openImageId :: Handle previousImage action',
       initialState.openImageId,
       actions.previousImage(initialState)
     );
-    const expectedState = '3';
+    const expectedState = '4';
 
     equal(actualState, expectedState);
     end();
@@ -149,7 +149,7 @@ test('reducers - openImageId :: Handle openImageLightboxCarousel action',
     const id = '7' // id of selected/clicked image
     const actualState = reducers.openImageId(
       initialState.openImageId,
-      actions.openImageLightboxCarousel(id)
+      actions.openImageLightboxCarousel({id})
     );
     const expectedState = '7';
 
