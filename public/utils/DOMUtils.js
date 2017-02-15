@@ -1,4 +1,12 @@
-// TODO: create a custom shared DOM library to make DOM API interaction cleaner
-const $d = document;
+export const dom = document;
 
-export default $d;
+export const checkImageLoaded = ( path ) => {
+
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve({path, status: 'ok', img});
+    img.onerror = () => resolve({path, status: 'error'});
+
+    img.src = path;
+  });
+}

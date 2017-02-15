@@ -1,10 +1,13 @@
 // Reset page styles
 @import './cssResets.less';
 
+// Fontello  styles
+@import './mixins/animation.css';
+
 // Share variables allows for a consistent design style guide
 @import '../../public/stylesheets/variables.less';
 
-// Icons
+// Icons fonts from Fontello
 @font-face {
   font-family: 'img-gallery-icons';
   src: url('../font/img-gallery-icons.eot?84889234');
@@ -62,12 +65,12 @@
 .icon-left-circled { .icon-before(left-circled); }
 .icon-right-circled { .icon-after(right-circled); }
 .icon-cancel-circled { .icon-before(cancel-circled); }
-.icon-spin5 { .icon(spin5); }
-.icon-firefox { .icon(firefox); }
-.icon-chrome { .icon(chrome); }
-.icon-opera { .icon(opera); }
-.icon-ie { .icon(ie); }
-.icon-resize-full-alt { .icon(resize-full-alt); }
+.icon-spin5 { .icon-before(spin5); }
+.icon-firefox { .icon-before(firefox); }
+.icon-chrome { .icon-before(chrome); }
+.icon-opera { .icon-before(opera); }
+.icon-ie { .icon-before(ie); }
+.icon-resize-full-alt { .icon-before(resize-full-alt); }
 
 // Local Mixins
 .thumbnail-transition-mixin {
@@ -161,9 +164,26 @@
   width: 100%;
 
   .cropped-img-wrapper {
+    overflow: hidden;
     outline: none;
     margin-bottom: -4px;
     padding-bottom: 0px;
+    width: 100px;
+    height: 100px;
+
+    .wide-image {
+      height: 100px;
+      width: auto;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .tall-image {
+      height: auto;
+      width: 100px;
+      display: block;
+      margin: auto;
+    }
   }
 
   .carousel-wrapper {
@@ -184,14 +204,6 @@
       &:hover:enabled {
         opacity: 1;
       }
-    }
-
-    .carousel-next-arrow {
-
-    }
-
-    .carousel-previous-arrow {
-
     }
   }
 
@@ -226,6 +238,23 @@
       &:after {
         opacity: 1;
       }
+    }
+  }
+
+  .loader-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin-top: 4px;
+
+    .loader {
+      font-size: 2em;
+      display: flex;
+      position: relative;;
+      opacity: 0.5;
     }
   }
 }

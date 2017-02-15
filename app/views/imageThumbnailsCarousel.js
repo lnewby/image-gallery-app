@@ -1,4 +1,4 @@
-import dom from '../../public/utils/DOMUtils.js';
+import {dom} from '../../public/utils/DOMUtils.js';
 import ThumbnailImage from './ThumbnailImage.js';
 
 class ImageThumbnailsCarousel {

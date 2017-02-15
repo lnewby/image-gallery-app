@@ -1,4 +1,4 @@
-import dom from '../../public/utils/DOMUtils.js';
+import {dom} from '../../public/utils/DOMUtils.js';
 
 class ImageLightboxCarousel {
 

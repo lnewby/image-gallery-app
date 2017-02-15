@@ -1,5 +1,5 @@
 import ImageCrop from './ImageCrop.js';
-import dom from '../../public/utils/DOMUtils.js';
+import {dom} from '../../public/utils/DOMUtils.js';
 
 class ThumbnailImage {
   constructor({ images, image, width, height, handleOpenImageLightboxCarousel }) {
@@ -27,7 +27,18 @@ class ThumbnailImage {
     thumbnailImageDiv.classList.add('thumbnail-image-wrapper');
     thumbnailImageDiv.setAttribute('id', id);
     thumbnailImageDiv.addEventListener('click', (event) => handleOpenImageLightboxCarousel({event, id}));
-    thumbnailImageDiv.appendChild(croppedImage.render());
+    const loadingIconWrapper = dom.createElement('div');
+    const loadingIcon = dom.createElement('div');
+    loadingIcon.classList.add('loader', 'icon-spin5', 'animate-spin');
+    loadingIconWrapper.classList.add('loader-wrapper');
+    loadingIconWrapper.appendChild(loadingIcon);
+    thumbnailImageDiv.appendChild(loadingIconWrapper);
+
+    const imagePromise = croppedImage.render();
+    imagePromise.then((data) => {
+      loadingIcon.classList.remove('icon-spin5');
+      thumbnailImageDiv.appendChild(data);
+    });
 
     return thumbnailImageDiv;
   }

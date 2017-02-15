@@ -1,4 +1,4 @@
-import dom from '../public/utils/DOMUtils.js';
+import {dom} from '../public/utils/DOMUtils.js';
 import createStore from './store/createStore.js';
 import * as actions from './actions/imageGalleryActions.js';
 import * as selectors from './selectors/imageGallerySelectors.js';
