@@ -13,6 +13,7 @@ To build everything in development mode, start the application, and setup a `wat
 git https://github.com/lnewby/image-gallery-app.git
 npm install
 npm run dev
+
 # Navigation to http://localhost:9000
 ```
 ## To run tests:
