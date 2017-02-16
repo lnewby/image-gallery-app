@@ -17,7 +17,6 @@ class ImageCrop {
     img.setAttribute('id', this.id);
 
     const imgIsWide = img.naturalWidth / img.naturalHeight > this.width / this.height;
-    let imgStyle = (imgIsWide) ? 'wide-image' : 'tall-image';
 
     if (imgIsWide) {
       img.classList.add('wide-image');
@@ -40,7 +39,7 @@ class ImageCrop {
       .then(({img, path, status}) => {
         const croppedImageDiv = dom.createElement('div');
         const image = this.buildImage(img);
-        croppedImageDiv.classList.add('cropped-img-wrapper');
+        croppedImageDiv.classList.add('cropped-img-wrapper', 'hidden');
         croppedImageDiv.appendChild(image);
         return croppedImageDiv;
       });

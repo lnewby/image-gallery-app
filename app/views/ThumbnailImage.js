@@ -36,9 +36,11 @@ class ThumbnailImage {
 
     // Use promise to handle display of spinner for image loading
     const imagePromise = croppedImage.render();
-    imagePromise.then((data) => {
-      loadingIcon.classList.remove('icon-spin5');
-      thumbnailImageDiv.appendChild(data);
+    imagePromise.then((image) => {
+      loadingIconWrapper.classList.add('hidden');
+      loadingIconWrapper.classList.remove('loader-wrapper');
+      image.classList.remove('hidden');
+      thumbnailImageDiv.appendChild(image);
     });
 
     return thumbnailImageDiv;

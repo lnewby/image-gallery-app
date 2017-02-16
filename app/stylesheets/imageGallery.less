@@ -86,10 +86,6 @@
   justify-content: center;
   z-index: 100; /* place above everything */
 
-  &.hidden {
-    display: none;
-  }
-
   .lighbox-transparent-gray-bg {
     position: absolute;
     width: 100%;
@@ -250,7 +246,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
     width: 100px;
     height: 100px;
     margin-top: 4px;
@@ -274,4 +269,9 @@
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
 }
