@@ -56,6 +56,34 @@ class ImageLightboxCarousel {
     return lightboxCloseButton;
   }
 
+  // Get the current image
+  image() {
+    return this.images.filter((image) => image.id === this.openImageId)[0];
+  }
+
+  lightboxImage() {
+    const lightboxImageWrapperDiv = dom.createElement('div');
+    const currentLightboxImage = dom.createElement('img');
+
+    // add style & attributes
+    lightboxImageWrapperDiv.classList.add('lightbox-img-wrapper');
+    currentLightboxImage.classList.add('lightbox-img');
+    currentLightboxImage.setAttribute('src', this.image().src.medium);
+    currentLightboxImage.setAttribute('alt', this.image().title);
+    lightboxImageWrapperDiv.appendChild(currentLightboxImage);
+
+    return lightboxImageWrapperDiv;
+  }
+
+  lightboxImageTitle() {
+    // add title
+    const currentLightboxImageTitleSpan = dom.createElement('h1');
+    currentLightboxImageTitleSpan.classList.add('lightbox-img-title');
+    currentLightboxImageTitleSpan.innerHTML = this.image().title;
+
+    return currentLightboxImageTitleSpan;
+  }
+
   render() {
     const lightboxWrapperDiv = dom.createElement('div');
     const lightboxGrayOverlayDiv = dom.createElement('div');
@@ -70,27 +98,23 @@ class ImageLightboxCarousel {
     // add lightbox close button
     lightboxWrapperDiv.appendChild(this.lightboxCloseButton());
 
-    // add prev arrow navigation button
-    lightboxWrapperDiv.appendChild(this.previousImageGroupArrow());
-
     if(this.images.length) {
       if (this.openImageId) {
-        const image = this.images.filter((image) => image.id === this.openImageId)[0];
+        const lightboxImgNavWrapperDiv = dom.createElement('div');
+        lightboxImgNavWrapperDiv.classList.add('lightbox-img-nav-wrapper');
 
-        // create image to display in lightbox
-        const lightboxImageWrapperDiv = dom.createElement('div');
-        const currentLightboxImage = dom.createElement('img');
+        // add prev arrow navigation button
+        lightboxImgNavWrapperDiv.appendChild(this.previousImageGroupArrow());
 
-        // add style & attributes
-        lightboxImageWrapperDiv.classList.add('lightbox-img-wrapper');
-        currentLightboxImage.classList.add('lightbox-img');
-        currentLightboxImage.setAttribute('src', image.src.medium);
-        currentLightboxImage.setAttribute('alt', image.title);
-        lightboxImageWrapperDiv.appendChild(currentLightboxImage);
-        lightboxWrapperDiv.appendChild(lightboxImageWrapperDiv);
+        // add image with title to display in lightbox
+        lightboxImgNavWrapperDiv.appendChild(this.lightboxImage());
 
         // add next arrow navigation button
-        lightboxWrapperDiv.appendChild(this.nextImageGroupArrow());
+        lightboxImgNavWrapperDiv.appendChild(this.nextImageGroupArrow());
+
+        lightboxWrapperDiv.appendChild(this.lightboxImageTitle());
+        lightboxWrapperDiv.appendChild(lightboxImgNavWrapperDiv);
+
       }
     } else {
       lightboxWrapperDiv.innerHTML = 'Oh no, where\'d the images go? ¯\\_(ツ)_/¯';

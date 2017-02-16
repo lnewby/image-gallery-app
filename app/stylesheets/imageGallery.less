@@ -88,7 +88,7 @@
   position: absolute;
   top:0;
   width: 100%;
-  height: 100%; 
+  height: 100%;
 
   .lighbox-transparent-gray-bg {
     position: absolute;
@@ -107,6 +107,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column-reverse;
     z-index: 200;
 
     .lightbox-close-btn {
@@ -159,6 +160,19 @@
 
     .lightbox-img-wrapper {
       padding: 15px;
+      z-index: 999;
+    }
+
+    .lightbox-img-nav-wrapper {
+      display:flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-img-title {
+      font-family: Century Gothic, sans-serif;
+      font-size: 1em;
+      color: @white;
       z-index: 999;
     }
   }
