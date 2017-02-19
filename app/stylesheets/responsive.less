@@ -1,0 +1,49 @@
+// Share variables allows for a consistent design style guide
+@import '../../public/stylesheets/variables.less';
+
+@media (max-width: @screen-sm-max) {
+  .image-gallery-header {
+    font-size: 2em;
+    line-height: normal;
+    font-weight: 600;
+    margin-top: 30px;
+  }
+
+  #image-gallery-app {
+    height: 150px;
+
+    .carousel-wrapper {
+      .carousel-arrow-controls {
+        padding: 5px;
+        font-size: 1.8em;
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  #image-gallery-app {
+    .carousel-wrapper {
+      flex-flow: column wrap;
+      width: 330px;
+      height: 300px;
+      margin-top: 170px;
+    }
+
+    .carousel-arrow-controls {
+      height: 260px;
+    }
+  }
+  .image-gallery-header {
+    font-size: 2em;
+    line-height: normal;
+    margin-top: 30px;
+  }
+}
+//
+@media (max-width: @screen-xs) {
+  .image-gallery-header {
+    font-size: 1.8em;
+  }
+}
