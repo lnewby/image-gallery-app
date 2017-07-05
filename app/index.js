@@ -89,8 +89,6 @@ const handleThumbnailImageSlider = ({ event, direction }) => {
     store.dispatch(
       actions.previousImageGroup()
     );
-
-    // TODO: Add some Tracking here for analytics
   }
 };
 
